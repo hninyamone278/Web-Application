@@ -9,7 +9,9 @@ export default defineConfig({
       '/api': 'http://localhost:5000',
       '/uploads': 'http://localhost:5000',
     },
+    middlewareMode: false,
   },
+  appType: 'spa',
   test: {
     environment: 'jsdom',
     globals: true,
