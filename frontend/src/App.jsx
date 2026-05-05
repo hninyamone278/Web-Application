@@ -24,9 +24,9 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
-          <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
             <Navbar />
-            <Box sx={{ flexGrow: 1, width: '100%' , maxWidth: { xs: '100%', sm: '90%', md: '1200px' }, mx: 'auto', px: { xs: 2, sm: 3, md: 4 } }}>
+            <Box sx={{ flexGrow: 1 }}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/products" element={<ProductsPage />} />
