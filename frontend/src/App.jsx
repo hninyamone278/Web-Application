@@ -21,13 +21,12 @@ import ServicesPage from './pages/ServicesPage';
 
 export default function App() {
   return (
-    <div className='app-container container'>
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
-          <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
             <Navbar />
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flexGrow: 1, width: '100%' , maxWidth: { xs: '100%', sm: '90%', md: '1200px' }, mx: 'auto', px: { xs: 2, sm: 3, md: 4 } }}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/products" element={<ProductsPage />} />
@@ -61,6 +60,5 @@ export default function App() {
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>
-    </div>
   );
 }
