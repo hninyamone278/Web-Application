@@ -21,6 +21,7 @@ import ServicesPage from './pages/ServicesPage';
 
 export default function App() {
   return (
+    <div className='app-container container'>
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
@@ -60,5 +61,6 @@ export default function App() {
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>
+    </div>
   );
 }
