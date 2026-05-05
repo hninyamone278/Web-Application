@@ -1,0 +1,17 @@
+{
+  "name": "hninymo-jewellery-shop",
+  "version": "1.0.0",
+  "description": "Jewellery shop full-stack app",
+  "scripts": {
+    "dev:client": "cd frontend && npm run dev",
+    "dev:server": "cd backend && npm run dev",
+    "seed": "cd backend && npm run seed",
+    "test": "cd backend && npm test && cd ../frontend && npm test",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "build": "cd frontend && npm run build",
+    "docker:up": "docker compose up --build -d",
+    "docker:down": "docker compose down"
+  },
+  "private": true
+}
