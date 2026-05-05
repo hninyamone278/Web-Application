@@ -12,7 +12,7 @@ export function getImageUrl(url) {
   }
   
   // Relative URL - prepend backend base URL
-  const backendUrl = import.meta.env.VITE_API_URL?.replace('/api', '') || '';
+  const backendUrl = import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || '';
   if (backendUrl) {
     return `${backendUrl}${url}`;
   }
