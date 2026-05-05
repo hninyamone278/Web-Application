@@ -5,6 +5,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import { getImageUrl } from '../services/imageUrl';
 
 const statusColor = { Pending: 'warning', Processing: 'info', Shipped: 'primary', Delivered: 'success', Cancelled: 'error' };
 
@@ -43,7 +44,7 @@ export default function OrderDetailPage() {
           <Box key={item.id} className="flex justify-between items-center py-2">
             <Box className="flex items-center gap-3">
               <img
-                src={item.product?.image_url || 'https://placehold.co/50x50?text=J'}
+                src={getImageUrl(item.product?.image_url)}
                 alt={item.product?.name}
                 style={{ width: 50, height: 50, objectFit: 'cover', borderRadius: 4 }}
               />

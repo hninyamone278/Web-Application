@@ -9,10 +9,11 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import api from '../services/api';
 import { useCart } from '../context/CartContext';
+import { getImageUrl } from '../services/imageUrl';
 
 function getProductImages(p) {
-  if (p.images && p.images.length > 0) return p.images.map((img) => img.image_url);
-  if (p.image_url) return [p.image_url];
+  if (p.images && p.images.length > 0) return p.images.map((img) => getImageUrl(img.image_url));
+  if (p.image_url) return [getImageUrl(p.image_url)];
   return ['https://placehold.co/400x300?text=Jewellery'];
 }
 

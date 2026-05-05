@@ -11,7 +11,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useRef, useState } from 'react';
 import api from '../../services/api';
-
+import { getImageUrl } from '../../services/imageUrl';
 const empty = { name: '', description: '', price: '', stock: '', category_id: '' };
 
 export default function AdminProducts() {
@@ -45,9 +45,9 @@ export default function AdminProducts() {
     setForm(product ? { name: product.name, description: product.description || '', price: product.price, stock: product.stock, category_id: product.category_id || '' } : empty);
     // Populate image slots from existing product images
     if (product?.images && product.images.length > 0) {
-      setImageSlots(product.images.map((img) => ({ file: null, url: img.image_url, preview: img.image_url })));
+      setImageSlots(product.images.map((img) => ({ file: null, url: img.image_url, preview: getImageUrl(img.image_url) })));
     } else if (product?.image_url) {
-      setImageSlots([{ file: null, url: product.image_url, preview: product.image_url }]);
+      setImageSlots([{ file: null, url: product.image_url, preview: getImageUrl(product.image_url) }]);
     } else {
       setImageSlots([]);
     }
@@ -195,7 +195,7 @@ export default function AdminProducts() {
             {filteredProducts.map((p) => (
               <TableRow key={p.id} hover>
                 <TableCell>
-                  <img src={(p.images && p.images[0]?.image_url) || p.image_url || 'https://placehold.co/50x50?text=J'}
+                  <img src={getImageUrl((p.images && p.images[0]?.image_url) || p.image_url)}
                     alt={p.name} style={{ width: 50, height: 50, objectFit: 'cover', borderRadius: 4 }} />
                 </TableCell>
                 <TableCell>{p.name}</TableCell>

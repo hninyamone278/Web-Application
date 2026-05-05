@@ -7,6 +7,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { getImageUrl } from '../services/imageUrl';
 
 export default function CartPage() {
   const { cart, updateQuantity, removeFromCart, total, clearCart } = useCart();
@@ -44,7 +45,7 @@ export default function CartPage() {
                 <TableCell>
                   <Box className="flex items-center gap-3">
                     <img
-                      src={item.image_url || 'https://placehold.co/60x60?text=J'}
+                      src={getImageUrl(item.image_url)}
                       alt={item.name}
                       style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 4 }}
                     />

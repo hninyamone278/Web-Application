@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { useCart } from '../context/CartContext';
+import { getImageUrl } from '../services/imageUrl';
 
 function getImages(product) {
-  if (product.images && product.images.length > 0) return product.images.map((img) => img.image_url);
-  if (product.image_url) return [product.image_url];
+  if (product.images && product.images.length > 0) return product.images.map((img) => getImageUrl(img.image_url));
+  if (product.image_url) return [getImageUrl(product.image_url)];
   return ['https://placehold.co/600x500?text=Jewellery'];
 }
 
