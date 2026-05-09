@@ -17,21 +17,21 @@ export default function OrdersPage() {
     api.get('/orders/my').then((r) => setOrders(r.data)).finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <Box className="flex justify-center py-20"><CircularProgress /></Box>;
+  if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', py: { xs: 10, md: 20 } }}><CircularProgress /></Box>;
 
   return (
-    <Box className="max-w-5xl mx-auto px-4 py-8">
-      <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 4 }}>My Orders</Typography>
+    <Box sx={{ maxWidth: 1200, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 8 } }}>
+      <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 4, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>My Orders</Typography>
       {orders.length === 0 ? (
-        <Box className="text-center py-12">
+        <Box sx={{ textAlign: 'center', py: { xs: 8, md: 12 } }}>
           <Typography variant="h6" gutterBottom>No orders yet</Typography>
           <Button variant="contained" onClick={() => navigate('/products')}
-            sx={{ bgcolor: '#1a1a2e', '&:hover': { bgcolor: '#d4af37', color: '#1a1a2e' } }}>
+            sx={{ bgcolor: '#1a1a2e', mt: 2, '&:hover': { bgcolor: '#d4af37', color: '#1a1a2e' } }}>
             Start Shopping
           </Button>
         </Box>
       ) : (
-        <Paper variant="outlined">
+        <Paper variant="outlined" sx={{ overflowX: 'auto' }}>
           <Table>
             <TableHead>
               <TableRow sx={{ bgcolor: '#f5f5f5' }}>

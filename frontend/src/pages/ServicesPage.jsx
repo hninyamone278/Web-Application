@@ -66,22 +66,22 @@ export default function ServicesPage() {
   return (
     <Box>
       {/* Hero */}
-      <Box sx={{ bgcolor: '#1a1a2e', color: '#fff', py: 10, textAlign: 'center', px: 4 }}>
-        <Typography variant="overline" sx={{ color: '#d4af37', letterSpacing: 4 }}>
+      <Box sx={{ bgcolor: '#1a1a2e', color: '#fff', py: { xs: 6, md: 10 }, textAlign: 'center', px: { xs: 2, sm: 3, md: 4 } }}>
+        <Typography variant="overline" sx={{ color: '#d4af37', letterSpacing: 2, fontSize: { xs: '0.7rem', md: '0.75rem' } }}>
           Client Services
         </Typography>
-        <Typography variant="h3" sx={{ fontFamily: 'serif', color: '#d4af37', mt: 1, mb: 2 }}>
+        <Typography variant="h3" sx={{ fontFamily: 'serif', color: '#d4af37', mt: 1, mb: 2, fontSize: { xs: '2rem', md: '2.5rem' } }}>
           Care &amp; Personalisation
         </Typography>
-        <Typography variant="body1" sx={{ color: '#ccc', maxWidth: 560, mx: 'auto', lineHeight: 1.8 }}>
+        <Typography variant="body1" sx={{ color: '#ccc', maxWidth: 560, mx: 'auto', lineHeight: 1.8, fontSize: { xs: '0.9rem', md: '1rem' } }}>
           Every piece deserves to be cherished. From restoration to personalisation, our expert
           craftspeople are here to keep your jewellery looking its best.
         </Typography>
       </Box>
 
       {/* Services grid */}
-      <Box className="max-w-7xl mx-auto px-4 py-16">
-        <Grid container spacing={4}>
+      <Box sx={{ maxWidth: 1280, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 8, md: 16 } }}>
+        <Grid container spacing={{ xs: 3, md: 4 }}>
           {SERVICES.map((s) => {
             const Icon = s.icon;
             return (
@@ -89,7 +89,7 @@ export default function ServicesPage() {
                 <Card
                   elevation={0}
                   sx={{
-                    height: 400,
+                    height: { xs: 'auto', md: 400 },
                     width: '100%',
                     maxWidth: 360,
                     mx: 'auto',

@@ -42,8 +42,8 @@ export default function ProductDetailPage() {
   };
 
   return (
-    <Box className="max-w-5xl mx-auto px-4 py-10">
-      <Box className="flex flex-col md:flex-row gap-8">
+    <Box sx={{ maxWidth: 1000, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 10 } }}>
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 3, md: 8 } }}>
         <Box sx={{ flex: 1 }}>
           {/* Main image with arrows */}
           <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>

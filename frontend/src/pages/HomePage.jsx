@@ -38,47 +38,48 @@ export default function HomePage() {
     <Box>
       {/* Hero */}
       <Box
-        sx={{ bgcolor: '#1a1a2e', color: '#d4af37', py: 12, textAlign: 'center' }}
-        className="px-4"
+        sx={{ bgcolor: '#1a1a2e', color: '#d4af37', py: { xs: 8, sm: 12, md: 16 }, textAlign: 'center', px: { xs: 2, sm: 4 } }}
       >
-        <DiamondIcon sx={{ fontSize: 60, mb: 2 }} />
-        <Typography variant="h2" sx={{ fontFamily: 'serif', mb: 2 }}>
+        <DiamondIcon sx={{ fontSize: { xs: 40, sm: 50, md: 60 }, mb: 2 }} />
+        <Typography variant="h2" sx={{ fontFamily: 'serif', mb: 2, fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3.75rem' } }}>
           Timeless Elegance
         </Typography>
-        <Typography variant="h6" sx={{ color: '#ccc', mb: 4, maxWidth: 500, mx: 'auto' }}>
+        <Typography variant="h6" sx={{ color: '#ccc', mb: 4, maxWidth: 500, mx: 'auto', fontSize: { xs: '0.95rem', sm: '1rem', md: '1.25rem' } }}>
           Discover our handcrafted jewellery collection — each piece tells a story.
         </Typography>
-        <Button
-          variant="contained"
-          size="large"
-          sx={{ bgcolor: '#d4af37', color: '#1a1a2e', '&:hover': { bgcolor: '#b8972e' } }}
-          onClick={() => navigate('/products')}
-        >
-          Shop Now
-        </Button>
-        <Button
-          variant="outlined"
-          size="large"
-          sx={{ ml: 2, borderColor: '#d4af37', color: '#d4af37', '&:hover': { bgcolor: 'rgba(212,175,55,0.1)' } }}
-          onClick={() => navigate('/book-appointment')}
-        >
-          Book Appointment
-        </Button>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, justifyContent: 'center' }}>
+          <Button
+            variant="contained"
+            size="large"
+            sx={{ bgcolor: '#d4af37', color: '#1a1a2e', '&:hover': { bgcolor: '#b8972e' }, width: { xs: '100%', sm: 'auto' } }}
+            onClick={() => navigate('/products')}
+          >
+            Shop Now
+          </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            sx={{ borderColor: '#d4af37', color: '#d4af37', '&:hover': { bgcolor: 'rgba(212,175,55,0.1)' }, width: { xs: '100%', sm: 'auto' } }}
+            onClick={() => navigate('/book-appointment')}
+          >
+            Book Appointment
+          </Button>
+        </Box>
       </Box>
 
       {/* Shop by Category */}
-      <Box className="max-w-7xl mx-auto px-4 py-16">
-        <Typography variant="overline" sx={{ display: 'block', textAlign: 'center', color: '#d4af37', letterSpacing: 4, mb: 1 }}>
+      <Box sx={{ maxWidth: 1280, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 8, md: 16 } }}>
+        <Typography variant="overline" sx={{ display: 'block', textAlign: 'center', color: '#d4af37', letterSpacing: 2, mb: 1, fontSize: { xs: '0.7rem', sm: '0.75rem' } }}>
           Collections
         </Typography>
-        <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 2, textAlign: 'center' }}>
+        <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 2, textAlign: 'center', fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' } }}>
           Explore Our Collections
         </Typography>
-        <Typography variant="body1" sx={{ textAlign: 'center', color: 'text.secondary', mb: 6, maxWidth: 480, mx: 'auto' }}>
+        <Typography variant="body1" sx={{ textAlign: 'center', color: 'text.secondary', mb: 6, maxWidth: 480, mx: 'auto', fontSize: { xs: '0.9rem', sm: '1rem' } }}>
           Browse by category and find something crafted for you.
         </Typography>
 
-        <Grid container spacing={3} justifyContent="center" sx={{ maxWidth: 960, mx: 'auto' }}>
+        <Grid container spacing={{ xs: 2, sm: 3 }} justifyContent="center" sx={{ maxWidth: 1000, mx: 'auto' }}>
           {categories.map((cat) => {
             const meta = CATEGORY_META[cat.name] || {};
             const Icon = meta.icon || DiamondIcon;
@@ -106,24 +107,25 @@ export default function HomePage() {
                   elevation={0}
                 >
                   <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', p: 0, pb: 4 }}>
-                    <Box sx={{ width: 68, height: 68, bgcolor: '#1a1a2e', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
-                      <Icon sx={{ fontSize: 30, color: '#d4af37' }} />
+                    <Box sx={{ width: { xs: 56, md: 68 }, height: { xs: 56, md: 68 }, bgcolor: '#1a1a2e', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
+                      <Icon sx={{ fontSize: { xs: 24, md: 30 }, color: '#d4af37' }} />
                     </Box>
-                    <Typography variant="h6" sx={{ fontFamily: 'serif', fontWeight: 400, mb: 1.5 }}>
+                    <Typography variant="h6" sx={{ fontFamily: 'serif', fontWeight: 400, mb: 1.5, fontSize: { xs: '1rem', md: '1.25rem' } }}>
                       {cat.name}
                     </Typography>
-                    <Typography variant="body2" sx={{ color: '#555', lineHeight: 1.6, fontSize: '0.88rem' }}>
+                    <Typography variant="body2" sx={{ color: '#555', lineHeight: 1.6, fontSize: { xs: '0.8rem', md: '0.88rem' } }}>
                       {meta.description || 'Handcrafted pieces made to last a lifetime.'}
                     </Typography>
                   </CardContent>
                   <Button
                     variant="outlined"
+                    size="small"
                     sx={{
                       color: '#d4af37',
                       borderColor: '#d4af37',
-                      px: 3,
+                      px: { xs: 2, md: 3 },
                       py: 1,
-                      fontSize: '0.7rem',
+                      fontSize: { xs: '0.65rem', md: '0.7rem' },
                       letterSpacing: '0.15em',
                       fontWeight: 600,
                       borderRadius: 0,
@@ -143,13 +145,14 @@ export default function HomePage() {
         <Box sx={{ textAlign: 'center', mt: 6 }}>
           <Button
             variant="outlined"
+            size="small"
             onClick={() => navigate('/products')}
             sx={{
               color: '#1a1a2e',
               borderColor: '#1a1a2e',
-              px: 4,
+              px: { xs: 2, md: 4 },
               py: 1.5,
-              fontSize: '0.75rem',
+              fontSize: { xs: '0.7rem', md: '0.75rem' },
               letterSpacing: '0.15em',
               fontWeight: 600,
               borderRadius: 0,

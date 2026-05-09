@@ -78,33 +78,33 @@ export default function AppointmentPage() {
 
   if (booked) {
     return (
-      <Box className="max-w-xl mx-auto px-4 py-16" sx={{ textAlign: 'center' }}>
-        <CheckCircleOutlineIcon sx={{ fontSize: 72, color: '#d4af37', mb: 2 }} />
-        <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 1 }}>Appointment Requested!</Typography>
-        <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3 }}>
+      <Box sx={{ maxWidth: 640, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 8, md: 16 }, textAlign: 'center' }}>
+        <CheckCircleOutlineIcon sx={{ fontSize: { xs: 56, md: 72 }, color: '#d4af37', mb: 2 }} />
+        <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 1, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>Appointment Requested!</Typography>
+        <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3, fontSize: { xs: '0.9rem', md: '1rem' } }}>
           Your {booked.appointment_type} appointment for <strong>{booked.purpose}</strong> on{' '}
           <strong>{booked.appointment_date}</strong> at <strong>{booked.time_slot}</strong> has been received.
           We'll confirm shortly.
         </Typography>
-        <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, justifyContent: 'center' }}>
           <Button
             variant="contained"
-            sx={{ bgcolor: '#d4af37', color: '#1a1a2e', '&:hover': { bgcolor: '#b8972e' } }}
+            sx={{ bgcolor: '#d4af37', color: '#1a1a2e', '&:hover': { bgcolor: '#b8972e' }, width: { xs: '100%', sm: 'auto' } }}
             onClick={() => navigate('/my-appointments')}
           >
             View My Appointments
           </Button>
-          <Button variant="outlined" onClick={() => navigate('/')}>Back to Home</Button>
+          <Button variant="outlined" onClick={() => navigate('/')} sx={{ width: { xs: '100%', sm: 'auto' } }}>Back to Home</Button>
         </Box>
       </Box>
     );
   }
 
   return (
-    <Box className="max-w-2xl mx-auto px-4 py-12">
-      <Box sx={{ textAlign: 'center', mb: 5 }}>
-        <EventAvailableIcon sx={{ fontSize: 52, color: '#d4af37', mb: 1 }} />
-        <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 1 }}>Book an Appointment</Typography>
+    <Box sx={{ maxWidth: 640, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 8 } }}>
+      <Box sx={{ textAlign: 'center', mb: 4 }}>
+        <EventAvailableIcon sx={{ fontSize: { xs: 40, md: 52 }, color: '#d4af37', mb: 1 }} />
+        <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 1, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>Book an Appointment</Typography>
         <Typography variant="body1" sx={{ color: 'text.secondary' }}>
           Schedule a personal in-store or virtual session with one of our jewellery advisors.
         </Typography>

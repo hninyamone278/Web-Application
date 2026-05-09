@@ -29,9 +29,9 @@ export default function LoginPage() {
   };
 
   return (
-    <Box className="flex justify-center items-center min-h-[70vh] px-4">
-      <Paper sx={{ p: 4, width: '100%', maxWidth: 420 }} elevation={3}>
-        <Typography variant="h5" sx={{ fontFamily: 'serif', mb: 3, textAlign: 'center' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: { xs: '65vh', md: '70vh' }, px: 2 }}>
+      <Paper sx={{ p: { xs: 3, sm: 4 }, width: '100%', maxWidth: 420 }} elevation={3}>
+        <Typography variant="h5" sx={{ fontFamily: 'serif', mb: 3, textAlign: 'center', fontSize: { xs: '1.25rem', md: '1.5rem' } }}>
           Sign In
         </Typography>
         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}

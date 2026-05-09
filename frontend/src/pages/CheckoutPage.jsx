@@ -112,11 +112,11 @@ export default function CheckoutPage() {
   // ─── Order Confirmation View ───
   if (orderPlaced && orderInfo) {
     return (
-      <Box className="max-w-2xl mx-auto px-4 py-8">
+      <Box sx={{ maxWidth: 640, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 8 } }}>
         {/* Success Header */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <CheckCircleOutlineIcon sx={{ fontSize: 64, color: '#4caf50', mb: 1 }} />
-          <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 1 }}>Order Placed!</Typography>
+          <CheckCircleOutlineIcon sx={{ fontSize: { xs: 48, md: 64 }, color: '#4caf50', mb: 1 }} />
+          <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 1, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>Order Placed!</Typography>
           <Typography variant="body1" color="text.secondary">
             Order <strong>#{orderInfo.orderId}</strong> has been placed successfully.
           </Typography>
@@ -203,28 +203,28 @@ export default function CheckoutPage() {
 
   // ─── Checkout Form View ───
   return (
-    <Box className="max-w-2xl mx-auto px-4 py-8">
-      <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 4 }}>Checkout</Typography>
+    <Box sx={{ maxWidth: 640, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 8 } }}>
+      <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 4, fontSize: { xs: '1.5rem', md: '2.125rem' } }}>Checkout</Typography>
 
       {/* Order Summary */}
-      <Paper variant="outlined" sx={{ p: 2, mb: 3 }}>
-        <Typography variant="h6" gutterBottom>Order Summary</Typography>
+      <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 }, mb: 3 }}>
+        <Typography variant="h6" gutterBottom sx={{ fontSize: { xs: '1rem', md: '1.1rem' } }}>Order Summary</Typography>
         {cart.map((i) => (
-          <Box key={i.id} className="flex justify-between py-1">
-            <Typography variant="body2">{i.name} × {i.quantity}</Typography>
-            <Typography variant="body2">${(parseFloat(i.price) * i.quantity).toFixed(2)}</Typography>
+          <Box key={i.id} sx={{ display: 'flex', justifyContent: 'space-between', py: 1 }}>
+            <Typography variant="body2" sx={{ fontSize: { xs: '0.85rem', md: '0.875rem' } }}>{i.name} × {i.quantity}</Typography>
+            <Typography variant="body2" sx={{ fontSize: { xs: '0.85rem', md: '0.875rem' } }}>${(parseFloat(i.price) * i.quantity).toFixed(2)}</Typography>
           </Box>
         ))}
         <Divider sx={{ my: 1 }} />
-        <Box className="flex justify-between">
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography fontWeight="bold">Total</Typography>
           <Typography fontWeight="bold" sx={{ color: '#d4af37' }}>{Math.round(total).toLocaleString()} MMK</Typography>
         </Box>
       </Paper>
 
       {/* Shipping Form */}
-      <Paper variant="outlined" sx={{ p: 3 }}>
-        <Typography variant="h6" gutterBottom>Shipping Details</Typography>
+      <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 } }}>
+        <Typography variant="h6" gutterBottom sx={{ fontSize: { xs: '1rem', md: '1.1rem' } }}>Shipping Details</Typography>
         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
         <Box component="form" onSubmit={handleSubmit}>
           <TextField

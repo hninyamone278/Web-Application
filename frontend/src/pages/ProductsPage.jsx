@@ -22,7 +22,7 @@ function ProductCardImage({ images, name, onClick }) {
   const prev = useCallback((e) => { e.stopPropagation(); setIdx((i) => (i - 1 + images.length) % images.length); }, [images.length]);
   const next = useCallback((e) => { e.stopPropagation(); setIdx((i) => (i + 1) % images.length); }, [images.length]);
   return (
-    <Box sx={{ width: 400, minWidth: 400, height: '100%', position: 'relative', overflow: 'hidden' }}>
+    <Box sx={{ width: '100%', maxWidth: { xs: '100%', sm: 180, md: 250 }, height: { xs: 200, sm: 180, md: 250 }, position: 'relative', overflow: 'hidden' }}>
       <CardMedia
         component="img"
         image={images[idx]}
@@ -94,13 +94,13 @@ export default function ProductsPage() {
   const handleSearchSubmit = (e) => { e.preventDefault(); setLoading(true); setPage(1); };
 
   return (
-    <Box className="max-w-7xl mx-auto px-4 py-8">
-      <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 4 }}>Our Collection</Typography>
-      <Box sx={{ display: 'flex', gap: 3, alignItems: 'flex-start' }}>
+    <Box sx={{ maxWidth: 1280, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 8 } }}>
+      <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 4, fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' } }}>Our Collection</Typography>
+      <Box sx={{ display: 'flex', gap: { xs: 2, md: 3 }, alignItems: 'flex-start' }}>
         {/* Sidebar Filters */}
         <Box
           sx={{
-            width: 260,
+            width: { xs: 'auto', md: 260 },
             flexShrink: 0,
             position: 'sticky',
             top: 80,
@@ -144,10 +144,10 @@ export default function ProductsPage() {
             <Box className="flex justify-center py-12"><CircularProgress /></Box>
           ) : (
             <>
-              <Grid container spacing={4}>
+              <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
                 {products.map((p) => (
                   <Grid item xs={12} key={p.id}>
-                    <Card sx={{ height: 400, width: 800, display: 'flex', flexDirection: 'row', overflow: 'hidden', transition: 'transform 0.3s, box-shadow 0.3s', '&:hover': { transform: 'translateY(-4px)', boxShadow: 6 } }}>
+                    <Card sx={{ minHeight: { xs: 200, sm: 280, md: 400 }, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, overflow: 'hidden', transition: 'transform 0.3s, box-shadow 0.3s', '&:hover': { transform: 'translateY(-4px)', boxShadow: 6 } }}>
                       <ProductCardImage images={getProductImages(p)} name={p.name} onClick={() => navigate(`/products/${p.id}`)} />
                       <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0 }}>
                         <CardContent sx={{ flexGrow: 1, cursor: 'pointer', pb: 1, overflow: 'hidden' }} onClick={() => navigate(`/products/${p.id}`)}>

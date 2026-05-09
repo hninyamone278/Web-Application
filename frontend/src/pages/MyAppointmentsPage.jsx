@@ -22,10 +22,10 @@ export default function MyAppointmentsPage() {
   }, []);
 
   return (
-    <Box className="max-w-4xl mx-auto px-4 py-10">
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 4 }}>
-        <EventNoteIcon sx={{ color: '#d4af37', fontSize: 36 }} />
-        <Typography variant="h4" sx={{ fontFamily: 'serif' }}>My Appointments</Typography>
+    <Box sx={{ maxWidth: 1000, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 8 } }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 4, flexWrap: 'wrap' }}>
+        <EventNoteIcon sx={{ color: '#d4af37', fontSize: { xs: 28, md: 36 } }} />
+        <Typography variant="h4" sx={{ fontFamily: 'serif', fontSize: { xs: '1.5rem', md: '2.125rem' } }}>My Appointments</Typography>
       </Box>
 
       {loading && <CircularProgress sx={{ color: '#d4af37', display: 'block', mx: 'auto', mt: 6 }} />}
