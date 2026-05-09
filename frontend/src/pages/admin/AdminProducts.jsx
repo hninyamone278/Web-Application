@@ -2,6 +2,7 @@ import {
   Box, Button, Typography, Table, TableBody, TableCell, TableHead, TableRow,
   IconButton, Dialog, DialogTitle, DialogContent, DialogActions, TextField,
   Select, MenuItem, FormControl, InputLabel, Alert, Paper, InputAdornment,
+  CircularProgress,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -27,6 +28,7 @@ export default function AdminProducts() {
   const fileInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
+  const [saving, setSaving] = useState(false);
 
   const filteredProducts = products.filter((p) => {
     if (filterCategory && p.category_id !== filterCategory) return false;
@@ -115,6 +117,7 @@ export default function AdminProducts() {
   const handleSave = async () => {
     setError('');
     if (!form.name || !form.price) { setError('Name and price are required'); return; }
+    setSaving(true);
     try {
       // Upload new image files and collect all URLs
       const imageUrls = [];
@@ -140,6 +143,8 @@ export default function AdminProducts() {
       load();
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to save product');
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -213,7 +218,7 @@ export default function AdminProducts() {
       </Paper>
 
       {/* Add/Edit Dialog */}
-      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      <Dialog open={open} onClose={saving ? undefined : handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>{editId ? 'Edit Product' : 'Add Product'}</DialogTitle>
         <DialogContent>
           {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
@@ -293,10 +298,10 @@ export default function AdminProducts() {
           </FormControl>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" onClick={handleSave}
+          <Button onClick={handleClose} disabled={saving}>Cancel</Button>
+          <Button variant="contained" onClick={handleSave} disabled={saving}
             sx={{ bgcolor: '#1a1a2e', '&:hover': { bgcolor: '#d4af37', color: '#1a1a2e' } }}>
-            Save
+            {saving ? <CircularProgress size={20} color="inherit" /> : 'Save'}
           </Button>
         </DialogActions>
       </Dialog>
