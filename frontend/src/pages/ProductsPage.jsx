@@ -1,10 +1,12 @@
 import {
   Box, Grid, Card, CardMedia, CardContent, CardActions, Typography, Button,
-  TextField, Slider, Select, MenuItem, FormControl, InputLabel, Pagination, Chip, CircularProgress, IconButton,
+  TextField, Slider, Select, MenuItem, FormControl, InputLabel, Pagination, Chip,
+  CircularProgress, IconButton, Drawer,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import FilterListIcon from '@mui/icons-material/FilterList';
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import api from '../services/api';
@@ -49,6 +51,38 @@ function ProductCardImage({ images, name, onClick }) {
   );
 }
 
+function FilterPanel({ search, setSearch, setLoading, categoryId, setCategoryId, setPage, categories, priceRange, setPriceRange }) {
+  const handleSearchSubmit = (e) => { e.preventDefault(); setLoading(true); setPage(1); };
+  return (
+    <Box sx={{ p: 2.5, border: '1px solid #e0e0e0', borderRadius: 2, bgcolor: 'background.paper' }}>
+      <Typography variant="h6" gutterBottom>Filters</Typography>
+
+      <Box component="form" onSubmit={handleSearchSubmit} sx={{ mb: 3 }}>
+        <TextField
+          size="small" fullWidth label="Search" value={search}
+          onChange={(e) => { setLoading(true); setSearch(e.target.value); }}
+        />
+      </Box>
+
+      <FormControl fullWidth size="small" sx={{ mb: 3 }}>
+        <InputLabel>Category</InputLabel>
+        <Select value={categoryId} label="Category" onChange={(e) => { setLoading(true); setCategoryId(e.target.value); setPage(1); }}>
+          <MenuItem value="">All</MenuItem>
+          {categories.map((c) => <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>)}
+        </Select>
+      </FormControl>
+
+      <Typography gutterBottom>Price Range: {priceRange[0] >= 1000 ? `${(priceRange[0] / 1000).toLocaleString()}K` : priceRange[0].toLocaleString()} – {priceRange[1] >= 1000 ? `${(priceRange[1] / 1000).toLocaleString()}K` : priceRange[1].toLocaleString()} MMK</Typography>
+      <Slider
+        value={priceRange} min={0} max={10000000} step={100000}
+        onChange={(_, v) => { setLoading(true); setPriceRange(v); setPage(1); }}
+        valueLabelDisplay="auto"
+        sx={{ color: '#d4af37' }}
+      />
+    </Box>
+  );
+}
+
 export default function ProductsPage() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -65,6 +99,9 @@ export default function ProductsPage() {
   const [categoryId, setCategoryId] = useState(searchParams.get('category_id') || '');
   const [priceRange, setPriceRange] = useState([0, 10000000]);
   const [page, setPage] = useState(parseInt(searchParams.get('page')) || 1);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const filterProps = { search, setSearch, setLoading, categoryId, setCategoryId, setPage, categories, priceRange, setPriceRange };
 
   useEffect(() => {
     api.get('/products/categories').then((r) => setCategories(r.data)).catch(() => {});
@@ -91,48 +128,47 @@ export default function ProductsPage() {
       .finally(() => { if (fetchId === fetchIdRef.current) setLoading(false); });
   }, [search, categoryId, priceRange, page, setSearchParams]);
 
-  const handleSearchSubmit = (e) => { e.preventDefault(); setLoading(true); setPage(1); };
-
   return (
     <Box sx={{ maxWidth: 1280, mx: 'auto', px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 8 } }}>
       <Typography variant="h4" sx={{ fontFamily: 'serif', mb: 4, fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' } }}>Our Collection</Typography>
+      {/* Mobile Filter Button */}
+      <Box sx={{ display: { xs: 'flex', md: 'none' }, mb: 2 }}>
+        <Button
+          variant="outlined"
+          startIcon={<FilterListIcon />}
+          onClick={() => setMobileFiltersOpen(true)}
+          sx={{ borderColor: '#d4af37', color: '#1a1a2e', '&:hover': { bgcolor: '#d4af37', color: '#1a1a2e' } }}
+        >
+          Filters
+        </Button>
+      </Box>
+
+      {/* Mobile Filter Drawer */}
+      <Drawer
+        anchor="bottom"
+        open={mobileFiltersOpen}
+        onClose={() => setMobileFiltersOpen(false)}
+        PaperProps={{ sx: { borderRadius: '16px 16px 0 0', p: 2, maxHeight: '85vh' } }}
+      >
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+          <Typography variant="h6">Filters</Typography>
+          <Button onClick={() => setMobileFiltersOpen(false)} size="small" sx={{ color: '#d4af37' }}>Done</Button>
+        </Box>
+        <FilterPanel {...filterProps} />
+      </Drawer>
+
       <Box sx={{ display: 'flex', gap: { xs: 2, md: 3 }, alignItems: 'flex-start' }}>
-        {/* Sidebar Filters */}
+        {/* Desktop Sidebar Filters */}
         <Box
           sx={{
-            width: { xs: 'auto', md: 260 },
+            width: 260,
             flexShrink: 0,
             position: 'sticky',
             top: 80,
             display: { xs: 'none', md: 'block' },
           }}
         >
-          <Box sx={{ p: 2.5, border: '1px solid #e0e0e0', borderRadius: 2, bgcolor: 'background.paper' }}>
-            <Typography variant="h6" gutterBottom>Filters</Typography>
-
-            <Box component="form" onSubmit={handleSearchSubmit} sx={{ mb: 3 }}>
-              <TextField
-                size="small" fullWidth label="Search" value={search}
-                onChange={(e) => { setLoading(true); setSearch(e.target.value); }}
-              />
-            </Box>
-
-            <FormControl fullWidth size="small" sx={{ mb: 3 }}>
-              <InputLabel>Category</InputLabel>
-              <Select value={categoryId} label="Category" onChange={(e) => { setLoading(true); setCategoryId(e.target.value); setPage(1); }}>
-                <MenuItem value="">All</MenuItem>
-                {categories.map((c) => <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>)}
-              </Select>
-            </FormControl>
-
-            <Typography gutterBottom>Price Range: {priceRange[0] >= 1000 ? `${(priceRange[0] / 1000).toLocaleString()}K` : priceRange[0].toLocaleString()} – {priceRange[1] >= 1000 ? `${(priceRange[1] / 1000).toLocaleString()}K` : priceRange[1].toLocaleString()} MMK</Typography>
-            <Slider
-              value={priceRange} min={0} max={10000000} step={100000}
-              onChange={(_, v) => { setLoading(true); setPriceRange(v); setPage(1); }}
-              valueLabelDisplay="auto"
-              sx={{ color: '#d4af37' }}
-            />
-          </Box>
+          <FilterPanel {...filterProps} />
         </Box>
 
         {/* Product Grid */}
