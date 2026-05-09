@@ -135,12 +135,13 @@ const adminCreateCategory = async (req, res) => {
 
 const adminUploadImage = (req, res) => {
   if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
-  res.json({ url: `/uploads/${req.file.filename}` });
+  // Cloudinary stores the full HTTPS URL in req.file.path
+  res.json({ url: req.file.path });
 };
 
 const adminUploadMultipleImages = (req, res) => {
   if (!req.files || req.files.length === 0) return res.status(400).json({ message: 'No files uploaded' });
-  const urls = req.files.map((f) => `/uploads/${f.filename}`);
+  const urls = req.files.map((f) => f.path);
   res.json({ urls });
 };
 
