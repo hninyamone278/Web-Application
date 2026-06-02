@@ -97,9 +97,16 @@ npm test   # Runs both backend and frontend tests
 
 ## Deployment
 
-### Docker Deployment (Recommended)
+The application is currently deployed on Render for public access.
 
-The application can be deployed using Docker Compose with three services: MySQL, Express backend, and Nginx frontend.
+Live Demo
+
+Frontend: [https://hninymojewelleryshop-qp8v.onrender.com]
+Backend API: [https://jewellery-shop-backend-8x9x.onrender.com]
+
+### Alternative Local Deployment
+
+The project also includes Docker and Docker Compose configurations for local containerized deployment.
 
 ```bash
 # Start all services
