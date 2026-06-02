@@ -7,7 +7,7 @@ A full-stack jewellery shop web application with appointment booking, product br
 **Frontend:** React, Vite, Material UI, Tailwind CSS, React Router  
 **Backend:** Express, Sequelize, MySQL, JWT Authentication, Multer  
 **Testing:** Jest, Supertest (backend), Vitest, React Testing Library (frontend)  
-**Deployment:** Docker, Docker Compose, Nginx, GitHub Actions CI/CD
+**Deployment:** Render, Docker, Docker Compose, Nginx, GitHub Actions CI/CD
 
 ## Project Structure
 
